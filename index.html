@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proposal Project</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #ffe6e6;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden; /* Disable scroll */
+        text-align: center;
+      }
+
+      h1 {
+        color: #b30059;
+        font-size: 2.5em;
+        margin-bottom: 20px;
+      }
+
+      /* Hide all pages by default */
+      .container,
+      .second-container,
+      .romantic-content,
+      .third-container {
+        display: none;
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .cartoon-image {
+        width: 300px;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        margin-bottom: 20px;
+      }
+
+      .buttons {
+        margin-top: 5px;
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        flex-wrap: wrap; /* Allow buttons to wrap in small screens */
+      }
+
+      button {
+        font-size: 1.1em;
+        padding: 10px 40px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        background-color: #ff66b2;
+        color: white;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        margin: 10px;
+      }
+
+      button:hover {
+        background-color: #ff3385;
+        transform: scale(1.1);
+      }
+
+      /* Page 2 content */
+      #second-page {
+        display: none;
+        background-color: #ffe6e6;
+        padding: 15px;
+        text-align: center;
+        border-radius: 15px;
+      }
+
+      /* Page 3 (Content after clicking No on Second Page) */
+      .third-container {
+        display: none;
+        background-color: #ffe6e6;
+        padding: 15px;
+        text-align: center;
+        border-radius: 15px;
+        position: relative; /* Allow absolute positioning inside */
+      }
+
+      .third-container h1 {
+        color: #b30059;
+      }
+
+      /* Romantic Page (If "Yes" Clicked on Page 1 or Page 2) */
+      #romantic-content {
+        display: none;
+        background-color: #ffe6e6;
+        padding: 15px;
+        text-align: center;
+        border-radius: 15px;
+      }
+
+      .romantic-content h1 {
+        color: #ff3399;
+      }
+
+      .heart {
+        font-size: 2.5em;
+        color: red;
+      }
+
+      /* Animation for "No" button on 3rd Page (Position change) */
+      .move-no {
+        transition: transform 1s ease;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 2em;
+        }
+
+        .buttons {
+          flex-direction: column;
+        }
+
+        button {
+          width: 80%;
+          font-size: 1.1em;
+          padding: 12px;
+        }
+
+        #cartoon-image {
+          max-width: 90%;
+        }
+
+        #romantic-content img {
+          max-width: 80%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Page 1: Initial Page with "Do You Love Me?" Question -->
+    <div class="container" id="initial-page" style="display: block">
+      <h1 id="main-question">Do You Love Me?</h1>
+      <img
+        class="cartoon-image"
+        src="https://i.pinimg.com/enabled_lo_mid/736x/36/49/6b/36496b1fbe62cb71e28ece8e0460757d.jpg"
+        alt="Cartoon Couple"
+      />
+      <div class="buttons">
+        <button onclick="noAnswer()">No</button>
+        <button onclick="yesAnswer()">Yes</button>
+      </div>
+    </div>
+
+    <!-- Page 2: Middle Page (If "No" Clicked on Page 1) -->
+    <div id="second-page">
+      <h1>Please accept me !</h1>
+      <img
+        class="cartoon-image"
+        src="https://i.pinimg.com/enabled_lo_mid/736x/4f/5f/b3/4f5fb3418017afdad9b3168f2a071bd1.jpg"
+        alt="Sad Cartoon"
+      />
+      <div class="buttons">
+        <button id="no-second-page" onclick="noAnswerSecondPage()">No</button>
+        <button onclick="yesAnswer()">Yes</button>
+      </div>
+    </div>
+
+    <!-- Page 3: New Page (For Extra Flow) -->
+    <div id="third-page" class="third-container">
+      <h1>Come on, Please Say Yes!</h1>
+      <img
+        class="cartoon-image"
+        src="https://i.pinimg.com/originals/c8/a0/a0/c8a0a053dd73fdef7baf67e9f4b88009.gif"
+        alt="Love Cartoon"
+      />
+      <div class="buttons">
+        <button id="no-third-page" onclick="noAnswerThirdPage()">No</button>
+        <button onclick="yesAnswer()">Yes</button>
+      </div>
+    </div>
+
+    <!-- Romantic Page (If "Yes" Clicked on Page 1 or Page 2) -->
+    <div id="romantic-content">
+      <h1>Yay! You Said Yes!</h1>
+      <img
+        class="cartoon-image"
+        src="https://i.pinimg.com/originals/48/94/e5/4894e54904c5dd0273cad07b2bf0ba64.gif"
+        alt="Romantic Cartoon"
+      />
+      <p>We are meant to be! <span class="heart">&hearts;</span></p>
+      <p>Forever and always, you and me.</p>
+    </div>
+
+    <script>
+      // Function for "No" on Initial Page
+      function noAnswer() {
+        document.getElementById('initial-page').style.display = 'none'; // Hide Page 1
+        document.getElementById('second-page').style.display = 'block'; // Show Page 2
+      }
+
+      // Function for "Yes" on Initial Page or Page 2
+      function yesAnswer() {
+        document.getElementById('second-page').style.display = 'none'; // Hide Page 2
+        document.getElementById('third-page').style.display = 'none'; // Hide Page 3
+        document.getElementById('initial-page').style.display = 'none'; // Hide Page 1
+        document.getElementById('romantic-content').style.display = 'block'; // Show Romantic Page
+      }
+
+      // Function for "No" on Second Page (Go to Page 3)
+      function noAnswerSecondPage() {
+        document.getElementById('second-page').style.display = 'none'; // Hide Page 2
+        document.getElementById('third-page').style.display = 'block'; // Show Page 3
+      }
+
+      // Function for "No" on Third Page (Move to a Random Position)
+      function noAnswerThirdPage() {
+        const noButton = document.getElementById('no-third-page');
+
+        // Random position on the page, avoiding overlap
+        const randomX = Math.floor(Math.random() * 60) + 10; // Random X between 10 and 70
+        const randomY = Math.floor(Math.random() * 60) + 10; // Random Y between 10 and 70
+
+        // Check if the space is empty
+        const containerWidth =
+          document.getElementById('third-page').offsetWidth;
+        const containerHeight =
+          document.getElementById('third-page').offsetHeight;
+
+        if (
+          randomX + noButton.offsetWidth > containerWidth ||
+          randomY + noButton.offsetHeight > containerHeight
+        ) {
+          return; // Avoid placing outside the container
+        }
+
+        noButton.style.position = 'absolute';
+        noButton.style.left = `${randomX}%`;
+        noButton.style.top = `${randomY}%`;
+
+        // Add "move-no" class for transition effect
+        noButton.classList.add('move-no');
+      }
+    </script>
+  </body>
+</html>
