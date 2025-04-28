@@ -14,7 +14,7 @@
         justify-content: center;
         align-items: center;
         height: 100vh;
-        overflow: hidden; /* Disable scroll */
+        overflow: hidden; 
         text-align: center;
       }
 
@@ -24,7 +24,6 @@
         margin-bottom: 20px;
       }
 
-      /* Hide all pages by default */
       .container,
       .second-container,
       .romantic-content,
@@ -48,7 +47,7 @@
         display: flex;
         justify-content: center;
         gap: 15px;
-        flex-wrap: wrap; /* Allow buttons to wrap in small screens */
+        flex-wrap: wrap; 
       }
 
       button {
@@ -68,7 +67,6 @@
         transform: scale(1.1);
       }
 
-      /* Page 2 content */
       #second-page {
         display: none;
         background-color: #ffe6e6;
@@ -77,21 +75,19 @@
         border-radius: 15px;
       }
 
-      /* Page 3 (Content after clicking No on Second Page) */
       .third-container {
         display: none;
         background-color: #ffe6e6;
         padding: 15px;
         text-align: center;
         border-radius: 15px;
-        position: relative; /* Allow absolute positioning inside */
+        position: relative; 
       }
 
       .third-container h1 {
         color: #b30059;
       }
 
-      /* Romantic Page (If "Yes" Clicked on Page 1 or Page 2) */
       #romantic-content {
         display: none;
         background-color: #ffe6e6;
@@ -109,12 +105,10 @@
         color: red;
       }
 
-      /* Animation for "No" button on 3rd Page (Position change) */
       .move-no {
         transition: transform 1s ease;
       }
 
-      /* Responsive Design */
       @media (max-width: 768px) {
         h1 {
           font-size: 2em;
@@ -141,7 +135,6 @@
     </style>
   </head>
   <body>
-    <!-- Page 1: Initial Page with "Do You Love Me?" Question -->
     <div class="container" id="initial-page" style="display: block">
       <h1 id="main-question">Do You Love Me?</h1>
       <img
@@ -155,7 +148,6 @@
       </div>
     </div>
 
-    <!-- Page 2: Middle Page (If "No" Clicked on Page 1) -->
     <div id="second-page">
       <h1>Please accept me !</h1>
       <img
@@ -169,7 +161,6 @@
       </div>
     </div>
 
-    <!-- Page 3: New Page (For Extra Flow) -->
     <div id="third-page" class="third-container">
       <h1>Come on, Please Say Yes!</h1>
       <img
@@ -183,7 +174,6 @@
       </div>
     </div>
 
-    <!-- Romantic Page (If "Yes" Clicked on Page 1 or Page 2) -->
     <div id="romantic-content">
       <h1>Yay! You Said Yes!</h1>
       <img
@@ -196,35 +186,29 @@
     </div>
 
     <script>
-      // Function for "No" on Initial Page
       function noAnswer() {
-        document.getElementById('initial-page').style.display = 'none'; // Hide Page 1
-        document.getElementById('second-page').style.display = 'block'; // Show Page 2
+        document.getElementById('initial-page').style.display = 'none'; 
+        document.getElementById('second-page').style.display = 'block'; 
       }
 
-      // Function for "Yes" on Initial Page or Page 2
       function yesAnswer() {
-        document.getElementById('second-page').style.display = 'none'; // Hide Page 2
-        document.getElementById('third-page').style.display = 'none'; // Hide Page 3
-        document.getElementById('initial-page').style.display = 'none'; // Hide Page 1
-        document.getElementById('romantic-content').style.display = 'block'; // Show Romantic Page
+        document.getElementById('second-page').style.display = 'none'; 
+        document.getElementById('third-page').style.display = 'none'; 
+        document.getElementById('initial-page').style.display = 'none'; 
+        document.getElementById('romantic-content').style.display = 'block'; 
       }
 
-      // Function for "No" on Second Page (Go to Page 3)
       function noAnswerSecondPage() {
-        document.getElementById('second-page').style.display = 'none'; // Hide Page 2
-        document.getElementById('third-page').style.display = 'block'; // Show Page 3
+        document.getElementById('second-page').style.display = 'none'; 
+        document.getElementById('third-page').style.display = 'block'; 
       }
 
-      // Function for "No" on Third Page (Move to a Random Position)
       function noAnswerThirdPage() {
         const noButton = document.getElementById('no-third-page');
 
-        // Random position on the page, avoiding overlap
-        const randomX = Math.floor(Math.random() * 60) + 10; // Random X between 10 and 70
-        const randomY = Math.floor(Math.random() * 60) + 10; // Random Y between 10 and 70
+        const randomX = Math.floor(Math.random() * 60) + 10; 
+        const randomY = Math.floor(Math.random() * 60) + 10; 
 
-        // Check if the space is empty
         const containerWidth =
           document.getElementById('third-page').offsetWidth;
         const containerHeight =
@@ -234,14 +218,13 @@
           randomX + noButton.offsetWidth > containerWidth ||
           randomY + noButton.offsetHeight > containerHeight
         ) {
-          return; // Avoid placing outside the container
+          return; 
         }
 
         noButton.style.position = 'absolute';
         noButton.style.left = `${randomX}%`;
         noButton.style.top = `${randomY}%`;
 
-        // Add "move-no" class for transition effect
         noButton.classList.add('move-no');
       }
     </script>
